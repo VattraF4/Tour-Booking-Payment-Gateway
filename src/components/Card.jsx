@@ -1,7 +1,8 @@
 import React from "react";
 import "./Card.css";
 
-function Card({ image, brand, description, price }) {
+function Card(props) {
+    const { image, brand, description, price } = props.products;
 
   return (
     <article className="w-[200px] overflow-hidden rounded-[20px] bg-[rgb(108,108,150)] p-[10px_10px_20px_10px] m-[5px_0px]">

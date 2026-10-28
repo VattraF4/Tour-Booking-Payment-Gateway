@@ -34,14 +34,8 @@ function Product() {
   ];
   return (
     <div>
-      {shoes.map((shoe, index) => (
-        <Card
-          key={shoe.id}
-          image={shoe.image}
-          brand={shoe.brand}
-          description={shoe.description}
-          price={shoe.price}
-        />
+      {shoes.map((p) => (
+        <Card products={p} key={p.id} />
       ))}
     </div>
   );

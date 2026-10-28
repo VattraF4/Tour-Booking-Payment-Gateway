@@ -34,8 +34,8 @@ function Product() {
   ];
   return (
     <div>
-      {shoes.map((p) => (
-        <Card products={p} key={p.id} />
+      {shoes.map((product) => (
+        <Card {...product} key={product.id} />
       ))}
     </div>
   );

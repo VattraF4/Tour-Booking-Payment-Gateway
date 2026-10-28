@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 
+import Profile from './components/Product'
+
 function App() {
-return (
-    <h1 className="text-3xl font-bold text-blue-600 underline">
-      Tailwind is running!
-    </h1>
+  return (
+    <div className="App">
+      <Profile/>
+    </div>
   )
 }
 

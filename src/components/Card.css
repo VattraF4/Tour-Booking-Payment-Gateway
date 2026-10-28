@@ -1,0 +1,14 @@
+/* src/components/card.css */
+@import "tailwindcss";
+h3,
+p {
+  @apply m-[5px,0px] text-white text-center;
+}
+
+h3 {
+  @apply text-white font-bold;
+}
+
+p {
+  @apply text-[rgb(193,193,193)];
+}

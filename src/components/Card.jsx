@@ -1,9 +1,9 @@
 import React from "react";
 import "./Card.css";
 
-function Card(props) {
-    const { image, brand, description, price } = props.products;
-
+// Similar to props.products.image, props.products.brand, props.products.description, props.products.price
+function Card({ products: { image, brand, description, price } }) {
+  // Destructuring the products prop to extract the individual properties
   return (
     <article className="w-[200px] overflow-hidden rounded-[20px] bg-[rgb(108,108,150)] p-[10px_10px_20px_10px] m-[5px_0px]">
       <img

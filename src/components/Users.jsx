@@ -1,7 +1,7 @@
 import React from "react";
 
 function Users(props) {
-  const { name, age, profile, } = props;
+  const { name, age, profile, onRemove } = props;
   return (
     <article className="flex items-center justify-between bg-[#3f3f3f] p-3 rounded-lg mb-4 transition duration-200 hover:-translate-y-0.5 hover:bg-[#4a4a4a] hover:shadow-lg">
       <div className="flex items-center gap-4">
@@ -15,6 +15,7 @@ function Users(props) {
         </span>
       </div>
       <button
+        onClick={onRemove}
         className="bg-[#b01b1b] hover:bg-[#901616] text-white px-4 py-2 rounded-md font-medium transition-colors"
       >
         Remove

@@ -6,11 +6,16 @@ const userData = [
   { id: 2, name: "Jane", position: "Designer" },
   { id: 3, name: "Bob", position: "Manager" },
 ];
+function getUserId(id) {
+  //   console.log(`User ID in Parent Component: ${id}`);
+  const newUser = userData.find((user) => user.id === id);
+  console.log(newUser);
+}
 function Users() {
   return (
     <div>
       {userData.map((user) => (
-        <Profile {...user} key={user.id} />
+        <Profile {...user} getId={getUserId} key={user.id} />
       ))}
     </div>
   );

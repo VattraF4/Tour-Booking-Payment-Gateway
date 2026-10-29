@@ -1,18 +1,17 @@
 import { useState } from "react";
 import "./App.css";
 function App() {
-  const [currentText, setCurrentText] = useState("Hello");
-
+  const [number, setNumber] = useState(0);
+  function handleIncrement() {
+    setTimeout(() => {
+      setNumber((number) => number + 1);
+    }, 900 );
+    console.log(setNumber);
+  }
   return (
     <div>
-      <h3>{currentText}</h3>
-      <input
-        onChange={(e) => setCurrentText(e.target.value)}
-        value={currentText}
-        type="text"
-        placeholder="typing"
-      />
-      <button onClick={() => setCurrentText("")}>Clear</button>
+      <h2>{number}</h2>
+      <button onClick={handleIncrement}>Increment</button>
     </div>
   );
 }

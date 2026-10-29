@@ -1,14 +1,15 @@
 import { useState } from "react";
 import "./App.css";
 
-import Profile from "./components/Product";
+import Product from "./components/Product";
 import Form from "./components/Form";
+import Users from "./components/Users";
 
 function App() {
   return (
     <div className="App">
       <Form />
-      {/* <Profile /> */}
+      <Users/>
     </div>
   );
 }

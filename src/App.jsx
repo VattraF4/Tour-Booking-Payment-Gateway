@@ -1,15 +1,18 @@
 import { useState } from "react";
 import "./App.css";
-
-import Product from "./components/Product";
-import Form from "./components/Form";
-import Users from "./components/Users";
-
 function App() {
+  const [countState, setCountState] = useState(0);
+
   return (
-    <div className="App">
-      <Form />
-      <Users/>
+    <div>
+      <h3 className="text-center text-[30px] font-bold">{countState}</h3>
+      <button
+        onClick={() => {
+          setCountState((countState) => countState + 1);
+        }}
+      >
+        Increment
+      </button>
     </div>
   );
 }

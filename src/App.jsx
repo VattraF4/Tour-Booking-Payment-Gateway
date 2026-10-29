@@ -3,9 +3,7 @@ import "./App.css";
 function App() {
   const [number, setNumber] = useState(0);
   function handleIncrement() {
-    setTimeout(() => {
-      setNumber((number) => number + 1);
-    }, 900 );
+    setTimeout(() => setNumber((number)=> number + 1), 300);
     console.log(setNumber);
   }
   return (

@@ -1,23 +1,25 @@
 import React from "react";
-import Profile from "./Profile";
 
-const userData = [
-  { id: 1, name: "John", position: "Developer" },
-  { id: 2, name: "Jane", position: "Designer" },
-  { id: 3, name: "Bob", position: "Manager" },
-];
-function getUserId(id) {
-  //   console.log(`User ID in Parent Component: ${id}`);
-  const newUser = userData.find((user) => user.id === id);
-  console.log(newUser);
-}
-function Users() {
+function Users(props) {
+  const { name, age, profile, } = props;
   return (
-    <div>
-      {userData.map((user) => (
-        <Profile {...user} getId={getUserId} key={user.id} />
-      ))}
-    </div>
+    <article className="flex items-center justify-between bg-[#3f3f3f] p-3 rounded-lg mb-4 transition duration-200 hover:-translate-y-0.5 hover:bg-[#4a4a4a] hover:shadow-lg">
+      <div className="flex items-center gap-4">
+        <img
+          src={profile}
+          alt={`${name}'s avatar`}
+          className="w-14 h-14 rounded-full bg-[#f6c857] object-cover"
+        />
+        <span className="text-white text-[20px] font-semibold">
+          {name} Age : {age}
+        </span>
+      </div>
+      <button
+        className="bg-[#b01b1b] hover:bg-[#901616] text-white px-4 py-2 rounded-md font-medium transition-colors"
+      >
+        Remove
+      </button>
+    </article>
   );
 }
 

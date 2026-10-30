@@ -1,87 +1,36 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import MemberListCard from "./components/MemberListCard";
 
 function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [members, setMembers] = useState([
-    { id: 1, name: "Ra Vattra", email: "ra.vattra@example.com" },
-    { id: 2, name: "John Doe", email: "john.doe@example.com" },
-    { id: 3, name: "Jane Smith", email: "jane.smith@example.com" },
-    { id: 4, name: "Alice Johnson", email: "alice.johnson@example.com" },
-    { id: 5, name: "Bob Brown", email: "bob.brown@example.com" },
-    { id: 6, name: "Ra Vattra", email: "ra.vattra@example.com" },
-    { id: 7, name: "John Doe", email: "john.doe@example.com" },
-    { id: 8, name: "Jane Smith", email: "jane.smith@example.com" },
-    { id: 9, name: "Alice Johnson", email: "alice.johnson@example.com" },
-    { id: 10, name: "Bob Brown", email: "bob.brown@example.com" },
-  ]);
+  const [text, setText] = useState("");
 
-  function removeMember(id) {
-    setMembers(members.filter((member) => member.id !== id));
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!name || !email) {
-      alert("Please fill in both name and email fields.");
-      return;
-    }
-  
-    const id = Date.now();
-    const newMember = { id, name, email };
-    setMembers([newMember, ...members]);
-    setName("");
-    setEmail("");
-  }
+  // Only sets .current to 0 on the very FIRST render.
+  // On render 2, 3, 4..., React ignores the `0` and gives back the existing ref.
+  const clicks = useRef(0);
+
+  const handleClick = () => {
+    clicks.current += 1;
+    console.log(clicks.current);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row items-center justify-center gap-4 p-4 sm:p-6">
-      <MemberListCard removeMember={removeMember} members={members} setMembers={setMembers} />
-      <form className="w-full max-w-md bg-white rounded-lg p-4 sm:p-6 shadow-lg space-y-4">
-        <h2 className="text-xl font-bold text-gray-800">Login</h2>
+    <div className="container mx-auto flex min-h-40 max-w-md flex-col items-center justify-center gap-4 rounded-2xl bg-amber-50 p-6 shadow-lg">
+      {/* Typing here triggers a re-render every letter */}
+      <input
+        className="w-full rounded-lg border border-amber-50-200 bg-white px-4 py-2 text-gray-800 shadow-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-200"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Type something..."
+      />
 
-        <div>
-          <label
-            htmlFor="name"
-            className="block mb-1 text-sm font-medium text-gray-700"
-          >
-            Name
-          </label>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            id="name"
-            type="text"
-            placeholder="Enter your name"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="email"
-            className="block mb-1 text-sm font-medium text-gray-700"
-          >
-            Email
-          </label>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
-          />
-        </div>
-
-        <button
-          onClick={handleSubmit}
-          type="submit"
-          className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
-        >
-          Submit
-        </button>
-      </form>
+      {/* Clicking does NOT trigger a render, but increments the ref */}
+      <button
+        className="rounded-lg bg-amber-500 px-5 py-2 font-semibold text-white shadow-sm transition hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:ring-offset-2 active:scale-95"
+        onClick={handleClick}
+      >
+        Click me
+      </button>
     </div>
   );
 }

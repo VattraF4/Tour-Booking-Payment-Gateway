@@ -11,6 +11,10 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if(!name || !email) {
+      alert("Please fill in both name and email fields.");
+      return;
+    }
     const id = Date.now();
     const newMember = {id, name, email };
     setMembers([...members, newMember]);

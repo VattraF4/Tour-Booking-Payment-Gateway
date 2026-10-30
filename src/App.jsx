@@ -4,13 +4,22 @@ import "./App.css";
 function App() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [members, setMembers] = useState([
+    { id: 1, name: "Ra Vattra", email: "ra.vattra@example.com" },
+    { id: 2, name: "John Doe", email: "john.doe@example.com" },
+  ]);
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(email, name);
+    const id = Date.now();
+    const newMember = {id, name, email };
+    setMembers([...members, newMember]);
+    setName("");
+    setEmail("");
   }
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <form className="w-full max-w-md bg-white rounded-lg p-6 shadow-lg space-y-4">
+    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row items-center justify-center gap-4 p-4 sm:p-6">
+      <form className="w-full max-w-md bg-white rounded-lg p-4 sm:p-6 shadow-lg space-y-4">
         <h2 className="text-xl font-bold text-gray-800">Login</h2>
 
         <div>
@@ -48,16 +57,23 @@ function App() {
         </div>
 
         <button
-          onClick={(e) => {
-            e.preventDefault();
-            console.log(email, name);
-          }}
+          onClick={handleSubmit}
           type="submit"
           className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
         >
           Submit
         </button>
       </form>
+      <div className="w-full max-w-md bg-white rounded-lg p-4 sm:p-6 shadow-lg">
+        <h3 className="text-lg font-medium text-gray-800">Members</h3>
+        <ul className="mt-2 space-y-1">
+          {members.map((member) => (
+            <li key={member.id} className="text-sm text-gray-600 wrap-anywhere">
+              {member.name} - {member.email}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

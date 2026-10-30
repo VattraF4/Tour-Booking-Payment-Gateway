@@ -6,6 +6,8 @@ import axios from "axios";
 function App() {
   const url = "https://api.github.com/users"; // Replace with your API endpoint
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,12 +28,20 @@ function App() {
         const response = await axios.get(url);
         setUsers(response.data);
       } catch (error) {
+        setIsError(true);
         console.log(error.response.status);
       }
+      setIsLoading(false);
     };
     fetchData();
   }, []);
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Error fetching data</div>;
+  }
   return (
     <div className="container mx-auto grid max-w-6xl grid-cols-1 gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3">
       {users.map((user) => (

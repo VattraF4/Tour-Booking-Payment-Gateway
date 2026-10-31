@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function TourCard({ tour }) {
+function TourCard(tour) {
   const images =
     tour.tourImages
       ?.slice()
@@ -10,17 +10,16 @@ function TourCard({ tour }) {
       .map((img) => img.image_url)
       .filter(Boolean) ?? [];
 
-  const [activeImage, setActiveImage] = useState(0);
-  const location = tour.location || tour.destination;
-  const description = tour.description || tour.excerpt;
+  const [isPrimaryImage, setIsPrimaryImage] = useState(0);
+  const description = tour.title;
   const price = tour.base_price;
 
   const previousImage = () => {
-    setActiveImage((current) => (current - 1 + images.length) % images.length);
+    setIsPrimaryImage((current) => (current - 1 + images.length) % images.length);
   };
 
   const nextImage = () => {
-    setActiveImage((current) => (current + 1) % images.length);
+    setIsPrimaryImage((current) => (current + 1) % images.length);
   };
 
   return (
@@ -28,7 +27,7 @@ function TourCard({ tour }) {
       {images.length > 0 && (
         <div className="relative">
           <img
-            src={images[activeImage]}
+            src={images[isPrimaryImage]}
             alt={tour.title || "Tour destination"}
             loading="lazy"
             className="h-56 w-full object-cover"
@@ -56,9 +55,9 @@ function TourCard({ tour }) {
                   <button
                     type="button"
                     key={`${image}-${index}`}
-                    onClick={() => setActiveImage(index)}
+                    onClick={() => setIsPrimaryImage(index)}
                     aria-label={`Show image ${index + 1}`}
-                    className={`h-2 w-2 rounded-full ${index === activeImage ? "bg-white" : "bg-white/50"}`}
+                    className={`h-2 w-2 rounded-full ${index === isPrimaryImage ? "bg-white" : "bg-white/50"}`}
                   />
                 ))}
               </div>
@@ -68,16 +67,14 @@ function TourCard({ tour }) {
       )}
       <div className="space-y-3 p-5">
         <h2 className="text-xl font-semibold text-slate-900">
-          {tour.title || "Untitled tour"}
+          {description || "Untitled tour"}
         </h2>
 
         <div className="flex flex-wrap gap-x-4 gap-y-2 border-t border-slate-100 pt-3 text-sm text-slate-500">
           {tour.duration_day && <span>Duration: {tour.duration_day} days</span>}
           {tour.duration_night && <span>{tour.duration_night} nights</span>}
           {tour.base_price != null && (
-            <span className="font-semibold text-slate-900">
-              Price: {tour.base_price}
-            </span>
+            <span className="font-semibold text-slate-900">Price: {price}</span>
           )}
         </div>
       </div>

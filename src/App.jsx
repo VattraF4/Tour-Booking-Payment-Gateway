@@ -1,24 +1,7 @@
-import { useEffect } from "react";
 import "./App.css";
-import GitHubUser from "./components/GitHubUser";
-import useFetchData from "./useFetchData";
 import TourList from "./components/TourList";
 
 function App() {
-  const url = "https://api.github.com/users"; // Replace with your API endpoint
-
-  const { data, isLoading, error } = useFetchData(url);
-
-  if (isLoading) {
-    return <div className="text-center">Loading...</div>;
-  }
-
-  if (error) {
-    return (
-      <div className="text-center text-red-500">Error: {error.message}</div>
-    );
-  }
-
   return (
     <>
       <TourList />

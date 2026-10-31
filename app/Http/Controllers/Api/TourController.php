@@ -24,6 +24,7 @@ class TourController extends Controller
             // 'includeExclude',
             // 'tourItinerary',
             // 'tourSchedule',
+            'tourImages'=> fn($qurey) => $qurey->orderByDesc('is_primary')->orderBy('id', 'asc'),
         ])->where('status', 'published')->paginate(10); // Paginate the results, 10 per page
 
         // Return the collection directly and append your custom message
@@ -53,6 +54,7 @@ class TourController extends Controller
     {
         $tour = Tour::with([
             'tourImages',
+            'tourImages'=> fn($qurey) => $qurey->orderByDesc('is_primary')->orderBy('id', 'asc'),
             'destination',
             'category',
             'includeExclude',
